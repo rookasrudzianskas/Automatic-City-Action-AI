@@ -7,7 +7,7 @@ video = cv2.VideoCapture('Tesla Dashcam Accident.mp4')
 
 
 # Our pre-trained car and pedestrian classifiers
-car_tracker_file = 'cars.xml'
+car_tracker_file = '../../cars.xml'
 pedestrian_tracker_file = 'haarcascade_fullbody.xml'
 
 # create car classifier. classifier identifies the object: person, car, etc.
