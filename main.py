@@ -42,40 +42,36 @@ classifier_file = 'cars.xml'
 #  run forever
 while True:
     # reads the current frame
-    read_successful, frame = video_file.read()
+    (read_successful, frame) = video_file.read()
 
+    if read_successful:
 
-#  create a car classifier
+        #  create a car classifier
+        car_tracker = cv2.CascadeClassifier(classifier_file)
+        # black and white image
+        black_n_white = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-car_tracker = cv2.CascadeClassifier(classifier_file)
-# black and white image
-black_n_white = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        # detect cars
 
-# detect cars
+        # cars = car_tracker.detectMultiScale(black_n_white)
 
-cars = car_tracker.detectMultiScale(black_n_white)
+        # for (x, y, w, h) in cars:
+        #     cv2.rectangle(video_file, (x, y), (x + w, y + h), (randint(0, 256), randint(0, 256), randint(0, 256)), 4)
+        #
+        # print(cars)
+    else:
+        break
 
-for (x, y, w, h) in cars:
-    cv2.rectangle(img, (x, y), (x+w, y+h), (randint(0, 256), randint(0, 256), randint(0, 256)), 4)
+    # display the detected car image
+    cv2.imshow("Rokas Car Detector", black_n_white)
 
-print(cars)
+    # Dont autoclous until the key is pressed
+    cv2.waitKey()
 
-# display the detected car image
-cv2.imshow("Rokas Car Detector", img)
-
-# Dont autoclous until the key is pressed
-cv2.waitKey()
-
-
-
-
-
-
-
-
-
-
-
-
+# # display the detected car image
+# cv2.imshow("Rokas Car Detector", img)
+#
+# # Dont autoclous until the key is pressed
+# cv2.waitKey()
 
 print("COMPLETED")
