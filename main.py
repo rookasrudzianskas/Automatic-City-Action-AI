@@ -1,4 +1,5 @@
 import cv2
+from random import randint
 
 # Our image
 img_file = 'Car_Detector.png'
@@ -15,11 +16,17 @@ car_tracker = cv2.CascadeClassifier(classifier_file)
 # black and white image
 black_n_white = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
+# detect cars
 
+cars = car_tracker.detectMultiScale(black_n_white)
 
+for (x, y, w, h) in cars:
+    cv2.rectangle(img, (x, y), (x+w, y+h), (randint(0, 256), randint(0, 256), randint(0, 256)), 4)
+
+print(cars)
 
 # display the detected car image
-cv2.imshow("Rokas Car Detector", black_n_white)
+cv2.imshow("Rokas Car Detector", img)
 
 # Dont autoclous until the key is pressed
 cv2.waitKey()
